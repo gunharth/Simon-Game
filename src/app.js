@@ -1,81 +1,93 @@
-var game = {
+const game = {
     count: 0,
     possibilities: [0, 1, 2, 3],
-    gameLevel: [0,1,2],
-    player: [],
-    gameLock: false,
+    gameSeq: [],
+    playerSeq: [],
+    lock: false,
 }
 
 let countField = document.querySelector('#count');
-const colors = document.querySelectorAll('.colors')
+const colors = document.querySelectorAll('.colors');
+const startButton = document.querySelector('#start');
 
-function clearGame() {
-    game.gameLevel = [];
-    game.count = 0;
-    addCount();
-}
+startButton.addEventListener('click', () => {
+    newGame();
+})
 
 function newGame() {
     clearGame();
 }
 
-function showMoves() {
+function clearGame() {
+    game.gameSeq = [];
+    game.count = 0;
+    addCount();
+}
+
+function addCount() {
+    game.count++;
+    countField.textContent = game.count;
+    addToGameSeq();
+}
+
+function addToGameSeq() {
+    game.gameSeq.push(game.possibilities[(Math.floor(Math.random() * 4))]);
+    showGameSeq();
+}
+
+function showGameSeq() {
     var i = 0;
     var moves = setInterval(function () {
-        playGame(game.gameLevel[i]);
+        playGame(game.gameSeq[i]);
         i++;
-        if (i >= game.gameLevel.length) {
+        if (i >= game.gameSeq.length) {
             clearInterval(moves);
         }
     }, 600)
 
-    clearPlayer();
+    clearPlayerSeq();
+}
+
+function clearPlayerSeq() {
+    game.playerSeq = [];
 }
 
 function playGame(id) {
-    // field.addClass('hover');
-    // console.log(field);
-    // field.classList.add('active');
     document.getElementsByClassName(id)[0].play();
     document.getElementById(id).classList.add('active');
-    // sound(field);
     setTimeout(function () {
         document.getElementById(id).classList.remove('active');
     }, 300);
 }
 
-function clearPlayer() {
-    game.player = [];
-}
-
 // Response on color click
 colors.forEach(color =>
     color.addEventListener('click', (e) => {
-        if (!game.gameLock) {
+        if (!game.lock) {
             color.classList.add('active');
             setTimeout(() => color.classList.remove('active'), 150);
             document.getElementsByClassName(e.target.id)[0].play();
+            console.log(e.target.id);
+            addToPlayerSeq(+e.target.id);
             //userplay(e.target)
         }
     })
 )
 
-function addToPlayer(id) {
-    var field = "#" + id
-    console.log(field);
-    game.player.push(field);
-    playerTurn(field);
+function addToPlayerSeq(id) {
+    game.playerSeq.push(id);
+    console.log(game.playerSeq);
+    playerCheck(id);
 }
 
-function playerTurn(x) {
-    if (game.player[game.player.length - 1] !== game.gameLevel[game.player.length - 1]) {
-            alert('Wrong move! Try again!');
-            showMoves();
+function playerCheck(id) {
+    if (game.playerSeq[game.playerSeq.length - 1] !== game.gameSeq[game.playerSeq.length - 1]) {
+            console.log('Wrong move! Try again!');
+            showGameSeq();
     } else {
         console.log('Good Move!');
-        //sound(x);
-        document.getElementsByClassName(x)[0].play();
-        var check = game.player.length === game.gameLevel.length;
+        document.getElementsByClassName(id)[0].play();
+        var check = game.playerSeq.length === game.gameSeq.length;
         if (check) {
             if (game.count == 20) {
                 alert('You won! Congrats.');
@@ -90,16 +102,3 @@ function playerTurn(x) {
 function nextLevel() {
     addCount();
 }
-
-function generateMove() {
-    game.gameLevel.push(game.possibilities[(Math.floor(Math.random() * 4))]);
-    showMoves();
-}
-
-function addCount() {
-    game.count++;
-    countField.textContent = game.count;
-    generateMove();
-}
-
-newGame();

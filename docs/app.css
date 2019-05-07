@@ -604,6 +604,8 @@ h3 {
   background: #ddd;
   box-shadow: 0 0 2px 19px #313131;
   text-align: center;
+  display: flex;
+  flex-flow: column;
 }
 
 #center > h1 {
@@ -615,6 +617,9 @@ h3 {
 #counter {
   padding: 20px 10px;
   height: 50px;
+  flex: 0;
+  width: 50%;
+  margin: 0 auto;
 }
 
 #counter > h1 {
