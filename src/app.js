@@ -6,7 +6,7 @@ const game = {
     lock: false,
 }
 
-let countField = document.querySelector('#count');
+const countField = document.querySelector('#count');
 const colors = document.querySelectorAll('.colors');
 const startButton = document.querySelector('#start');
 
@@ -26,7 +26,12 @@ function clearGame() {
 
 function addCount() {
     game.count++;
+    countField.classList.add('fade');
     countField.textContent = game.count;
+    setTimeout(() => {
+        countField.classList.remove('fade');
+    }, 750);
+
     addToGameSeq();
 }
 

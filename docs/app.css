@@ -612,6 +612,8 @@ h3 {
   margin-top: 20px;
   font-size: 2.8em;
   font-weight: 700;
+  color: #d9d9d9;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1), 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 #counter {
@@ -632,6 +634,11 @@ h3 {
   border-radius: 10px;
 }
 
+#count {
+  opacity: 1;
+  transition: opacity 750ms ease-in-out;
+}
+
 #led {
   width: 5px;
   height: 5px;
@@ -641,6 +648,10 @@ h3 {
   position: absolute;
   top: -10px;
   right: -10px;
+}
+
+.fade {
+  opacity: 0;
 }
 
 @media screen and (max-width: 550px) {
