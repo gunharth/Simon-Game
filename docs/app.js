@@ -81,10 +81,10 @@ function handleInteraction(e) {
 }
 colors.forEach(color =>
     color.addEventListener('touchstart', (e) => {
-        handleInteraction;
+        handleInteraction
     })
     color.addEventListener('click', (e) => {
-        handleInteraction;
+        handleInteraction
     })
 )
 
