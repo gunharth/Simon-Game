@@ -79,14 +79,10 @@ function handleInteraction(e) {
         //userplay(e.target)
     }
 }
-colors.forEach(color =>
-    color.addEventListener('touchstart', (e) => {
-        handleInteraction
-    })
-    color.addEventListener('click', (e) => {
-        handleInteraction
-    })
-)
+colors.forEach(color => {
+    color.addEventListener('touchstart', handleInteraction);
+    color.addEventListener('click', handleInteraction);
+});
 
 function addToPlayerSeq(id) {
     game.playerSeq.push(id);
