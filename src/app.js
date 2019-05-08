@@ -71,8 +71,8 @@ function playGame(id) {
 function handleInteraction(e) {
     e.preventDefault();
     if (!game.lock) {
-        color.classList.add('active');
-        setTimeout(() => color.classList.remove('active'), 150);
+        e.target.classList.add('active');
+        setTimeout(() => e.target.classList.remove('active'), 150);
         document.getElementsByClassName(e.target.id)[0].play();
         console.log(e.target.id);
         addToPlayerSeq(+e.target.id);
