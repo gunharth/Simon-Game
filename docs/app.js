@@ -66,16 +66,28 @@ function playGame(id) {
 }
 
 // Response on color click
+
+
+function handleInteraction(e) {
+    e.preventDefault();
+    if (!game.lock) {
+        color.classList.add('active');
+        setTimeout(() => color.classList.remove('active'), 150);
+        document.getElementsByClassName(e.target.id)[0].play();
+        console.log(e.target.id);
+        addToPlayerSeq(+e.target.id);
+        //userplay(e.target)
+    }
+}
+colors.forEach(color =>
+    color.addEventListener('touchstart', (e) => {
+        handleInteraction(e);
+    })
+)
+
 colors.forEach(color =>
     color.addEventListener('click', (e) => {
-        if (!game.lock) {
-            color.classList.add('active');
-            setTimeout(() => color.classList.remove('active'), 150);
-            document.getElementsByClassName(e.target.id)[0].play();
-            console.log(e.target.id);
-            addToPlayerSeq(+e.target.id);
-            //userplay(e.target)
-        }
+        handleInteraction(e);
     })
 )
 
