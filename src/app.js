@@ -3,14 +3,20 @@ const game = {
     possibilities: [0, 1, 2, 3],
     gameSeq: [],
     playerSeq: [],
-    lock: false,
+    lock: true,
+    textStart: 'Start game',
+    textLevel: 'Next level',
+    textAgain: 'Try again?',
+    textWinner: 'Wohoo!<br>You won!',
 }
 
 const countField = document.querySelector('#count');
 const colors = document.querySelectorAll('.colors');
+const message = document.querySelector('#message');
 const startButton = document.querySelector('#start');
 
-startButton.addEventListener('click', () => {
+startButton.addEventListener('click', (e) => {
+    e.preventDefault();
     newGame();
 })
 
@@ -21,6 +27,9 @@ function newGame() {
 function clearGame() {
     game.gameSeq = [];
     game.count = 0;
+    game.lock = true;
+    startButton.textContent = game.textStart;
+    message.textContent = '';
     addCount();
 }
 
@@ -31,7 +40,6 @@ function addCount() {
     setTimeout(() => {
         countField.classList.remove('fade');
     }, 750);
-
     addToGameSeq();
 }
 
@@ -48,12 +56,12 @@ function showGameSeq() {
         if (i >= game.gameSeq.length) {
             clearInterval(moves);
         }
-    }, 600)
-
+    }, 700)
     clearPlayerSeq();
 }
 
 function clearPlayerSeq() {
+    game.lock = false;
     game.playerSeq = [];
 }
 
@@ -65,20 +73,17 @@ function playGame(id) {
     }, 300);
 }
 
-// Response on color click
-
-
+// closure for click or touch event
 function handleInteraction(e) {
     e.preventDefault();
     if (!game.lock) {
-        e.target.classList.add('active');
-        setTimeout(() => e.target.classList.remove('active'), 150);
         document.getElementsByClassName(e.target.id)[0].play();
-        console.log(e.target.id);
+        e.target.classList.add('active');
+        setTimeout(() => e.target.classList.remove('active'), 300);
         addToPlayerSeq(+e.target.id);
-        //userplay(e.target)
     }
 }
+// bind click or touch to color areas
 colors.forEach(color => {
     color.addEventListener('touchstart', handleInteraction);
     color.addEventListener('click', handleInteraction);
@@ -86,24 +91,27 @@ colors.forEach(color => {
 
 function addToPlayerSeq(id) {
     game.playerSeq.push(id);
-    console.log(game.playerSeq);
-    playerCheck(id);
+    checkPlayerSeq(id);
 }
 
-function playerCheck(id) {
+function checkPlayerSeq(id) {
     if (game.playerSeq[game.playerSeq.length - 1] !== game.gameSeq[game.playerSeq.length - 1]) {
-            console.log('Wrong move! Try again!');
-            showGameSeq();
+        message.textContent = `Congratulations you did ${game.count} turns!`;
+        startButton.textContent = 'Restart game';
+        game.lock = true;
     } else {
-        console.log('Good Move!');
         document.getElementsByClassName(id)[0].play();
         var check = game.playerSeq.length === game.gameSeq.length;
         if (check) {
-            if (game.count == 20) {
-                alert('You won! Congrats.');
+            if (game.count == 2) {
+                message.innerHTML = game.textWinner;
+                startButton.textContent = game.textStart;
             } else {
-                alert('Next round!');
-                nextLevel();
+                message.textContent = game.textLevel;
+                setTimeout(() => {
+                    message.textContent = '';
+                    nextLevel();
+                }, 2000);
             }
         }
     }

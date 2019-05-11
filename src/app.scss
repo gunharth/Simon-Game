@@ -4,10 +4,17 @@
     outline: none;
 }
 
-$color: #ccc;
+$green: #2e7d32;
+$green-light: #60ad5e;
+$green-dark: #005005;
+$red: #c62828;
+$red-light: #ff5f52;
+$blue: #1565c0;
+$blue-light: #5e92f3;
+$yellow: #fbc02d;
+$yellow-light: #fff263;
 
 body {
-    // background: $color;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -17,6 +24,7 @@ body {
 }
 
 h1,
+h2,
 h3 {
     margin: 0;
     display: inline-block;
@@ -44,11 +52,14 @@ h3 {
 }
 
 .green {
-    background: rgb(49, 124, 54);
-    ;
+    background: $green;
     border-top-left-radius: 100%;
     margin-top: 20px;
     margin-left: 20px;
+}
+
+.green:hover {
+    background: $green-light;
 }
 
 .green.active {
@@ -56,10 +67,14 @@ h3 {
 }
 
 .red {
-    background: rgb(196, 42, 46);
+    background: $red;
     border-top-right-radius: 100%;
     margin-top: 20px;
     margin-right: 20px;
+}
+
+.red:hover {
+    background: $red-light;
 }
 
 .red.active {
@@ -67,10 +82,14 @@ h3 {
 }
 
 .yellow {
-    background: rgb(247, 167, 56);
+    background: $yellow;
     border-bottom-left-radius: 100%;
     margin-bottom: 20px;
     margin-left: 20px;
+}
+
+.yellow:hover {
+    background: $yellow-light;
 }
 
 .yellow.active {
@@ -78,10 +97,14 @@ h3 {
 }
 
 .blue {
-    background: rgb(27, 99, 181);
+    background: $blue;
     border-bottom-right-radius: 100%;
     margin-bottom: 20px;
     margin-right: 20px;
+}
+
+.blue:hover {
+    background: $blue-light;
 }
 
 .blue.active {
@@ -110,8 +133,11 @@ h3 {
 }
 
 #center>h1 {
-    margin-top: 20px;
-    font-size: 2.8em;
+    position: absolute;
+    top: 35%;
+    z-index: -1;
+    width: 100%;
+    font-size: 4em;
     font-weight: 700;
     color: #d9d9d9;
     text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5);
@@ -151,6 +177,45 @@ h3 {
     position: absolute;
     top: -10px;
     right: -10px;
+}
+
+#message {
+    height: 40%;
+    font-size: 2em;
+}
+
+#starter {
+    // position: absolute;
+    // bottom: 0;
+    // width: 100%;
+    flex: 0;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.myButton {
+    background-color: $green;
+    -moz-border-radius: 28px;
+    -webkit-border-radius: 28px;
+    border-radius: 28px;
+    border: 1px solid #26772f;
+    display: inline-block;
+    cursor: pointer;
+    color: #fff;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 12px 20px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #2f6627;
+}
+
+.myButton:hover {
+    background-color: $green-light;
+}
+
+.myButton:active {
+    position: relative;
+    top: 1px;
 }
 
 .fade {
