@@ -11,7 +11,7 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.copy('src/app.js', 'docs/');
+mix.js('src/app.js', 'docs/');
 mix.sass('src/app.scss', 'docs/');
 mix.copy('src/index.html', 'docs/');
 
