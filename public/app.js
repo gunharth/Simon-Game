@@ -99,12 +99,6 @@ __webpack_require__.r(__webpack_exports__);
 
 customElements.define('simon-game', _simon_game_js__WEBPACK_IMPORTED_MODULE_0__["SimonGame"]);
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').then(function () {
-    console.log("Service Worker Registered");
-  });
-}
-
 /***/ }),
 
 /***/ "./src/app.scss":
