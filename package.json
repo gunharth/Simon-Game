@@ -1,7 +1,7 @@
 {
-  "name": "todo-app",
+  "name": "simon-game",
   "version": "1.0.0",
-  "description": "Nodejs Todo App",
+  "description": "Simon Game",
   "engines": {
     "node": "11.x"
   },
@@ -20,7 +20,7 @@
     "todo",
     "express"
   ],
-  "author": "Guni",
+  "author": "Gunharth Randolf",
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.4"

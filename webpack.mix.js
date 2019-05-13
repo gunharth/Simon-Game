@@ -11,9 +11,19 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('src/app.js', 'docs/');
-mix.sass('src/app.scss', 'docs/');
-mix.copy('src/index.html', 'docs/');
+mix.js('src/app.js', 'public/');
+mix.sass('src/app.scss', 'public/');
+mix.copy('src/index.html', 'public/');
+
+// mix.webpackConfig({
+//     plugins: [
+//         new HtmlMinifierPlugin({
+//             // HTMLMinifier options
+//             test: /\.html$/,
+//             loaders: ['file-loader?name=[name].html', 'extract-loader', 'html-loader']
+//         })
+//     ]
+// })
 
 mix.browserSync({
     proxy: 'localhost:3000',
@@ -22,7 +32,7 @@ mix.browserSync({
         port: 3002
     },
     files: [
-        'docs/*',
+        'public/*',
         //'src/*'
     ]
 });
