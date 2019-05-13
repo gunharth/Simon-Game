@@ -112,6 +112,17 @@ customElements.define('simon-game', _simon_game_js__WEBPACK_IMPORTED_MODULE_0__[
 
 /***/ }),
 
+/***/ "./src/global.scss":
+/*!*************************!*\
+  !*** ./src/global.scss ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./src/simon-game.js":
 /*!***************************!*\
   !*** ./src/simon-game.js ***!
@@ -166,22 +177,25 @@ function (_HTMLElement) {
 
 
     _this.game = {
+      rounds: 5,
+      // default 20 rounds to go
       count: 0,
       options: [0, 1, 2, 3],
       gameSeq: [],
       playerSeq: [],
       lock: true,
-      textStart: 'Start game',
-      textLevel: 'Next level',
-      textAgain: 'Try again?',
+      // textStart: 'Start',
+      textDefault: 'Simon says',
+      textLevel: ['Good!', 'Awesome!', 'Well done!', 'Great!', 'Fantastic!', 'Bligh me!'],
+      textAgain: 'Sorry!',
       textWinner: 'Wohoo!<br>You won!' // game fields and buttons
 
     };
-    _this.countField;
+    _this.score;
     _this.colors;
     _this.sounds;
     _this.message;
-    _this.startButton;
+    _this.startGame;
     return _this;
   }
 
@@ -192,16 +206,22 @@ function (_HTMLElement) {
 
       this.render(); // init game fields and buttons
 
-      this.countField = this.shadowRoot.querySelector('#count');
+      this.score = this.shadowRoot.querySelector('#score');
       this.colors = this.shadowRoot.querySelectorAll('.colors');
       this.sounds = this.shadowRoot.querySelectorAll('audio');
       this.message = this.shadowRoot.querySelector('#message');
-      this.startButton = this.shadowRoot.querySelector('#start'); // event handlers
+      this.startGame = this.shadowRoot.querySelectorAll('.startgame'); // event handlers
+      // this.startGame.addEventListener('click', (e) => {
+      //     e.preventDefault();
+      //     this.newGame();
+      // });
 
-      this.startButton.addEventListener('click', function (e) {
-        e.preventDefault();
+      this.startGame.forEach(function (start) {
+        start.addEventListener('click', function (e) {
+          e.preventDefault();
 
-        _this2.newGame();
+          _this2.newGame();
+        });
       });
       this.colors.forEach(function (color) {
         color.addEventListener('click', function (e) {
@@ -219,22 +239,22 @@ function (_HTMLElement) {
     value: function clearGame() {
       this.game.gameSeq = [];
       this.game.count = 0;
-      this.game.lock = true;
-      this.startButton.textContent = this.game.textStart;
-      this.message.textContent = '';
+      this.updateScore(); // this.game.lock = true;
+      // this.startGame.textContent = this.game.textStart;
+
+      this.message.textContent = this.game.textDefault;
       this.addCount();
     }
   }, {
     key: "addCount",
     value: function addCount() {
-      var _this3 = this;
-
       this.game.count++;
-      this.countField.classList.add('fade');
-      this.countField.textContent = this.game.count;
-      setTimeout(function () {
-        _this3.countField.classList.remove('fade');
-      }, 750);
+      this.game.lock = true; // this.score.classList.add('fade');
+      // this.score.textContent = this.game.count;
+      // setTimeout(() => {
+      //     this.score.classList.remove('fade');
+      // }, 750);
+
       this.addToGameSeq();
     }
   }, {
@@ -246,15 +266,15 @@ function (_HTMLElement) {
   }, {
     key: "showGameSeq",
     value: function showGameSeq() {
-      var _this4 = this;
+      var _this3 = this;
 
       var i = 0;
       var moves = setInterval(function () {
-        _this4.playGame(_this4.game.gameSeq[i]);
+        _this3.playGame(_this3.game.gameSeq[i]);
 
         i++;
 
-        if (i >= _this4.game.gameSeq.length) {
+        if (i >= _this3.game.gameSeq.length) {
           clearInterval(moves);
         }
       }, 700);
@@ -269,12 +289,12 @@ function (_HTMLElement) {
   }, {
     key: "playGame",
     value: function playGame(id) {
-      var _this5 = this;
+      var _this4 = this;
 
       this.sounds[id].play();
       this.colors[id].classList.add('active');
       setTimeout(function () {
-        _this5.colors[id].classList.remove('active');
+        _this4.colors[id].classList.remove('active');
       }, 300);
     }
   }, {
@@ -301,30 +321,36 @@ function (_HTMLElement) {
   }, {
     key: "checkPlayerSeq",
     value: function checkPlayerSeq(id) {
-      var _this6 = this;
+      var _this5 = this;
 
       if (this.game.playerSeq[this.game.playerSeq.length - 1] !== this.game.gameSeq[this.game.playerSeq.length - 1]) {
-        this.message.textContent = "Congratulations you did ".concat(this.game.count, " turns!");
-        this.startButton.textContent = 'Restart game';
+        this.message.innerHTML = " \xAF\\_(\u30C4)_/\xAF<br>You did ".concat(this.game.count - 1, " turns!");
         this.game.lock = true;
       } else {
         this.sounds[id].play();
         var check = this.game.playerSeq.length === this.game.gameSeq.length;
 
         if (check) {
-          if (this.game.count == 2) {
-            this.message.innerHTML = this.game.textWinner;
-            this.startButton.textContent = this.game.textStart;
-          } else {
-            this.message.textContent = this.game.textLevel;
-            setTimeout(function () {
-              _this6.message.textContent = '';
+          this.updateScore();
 
-              _this6.nextLevel();
+          if (this.game.count == this.game.rounds) {
+            this.message.innerHTML = this.game.textWinner;
+          } else {
+            this.game.lock = true;
+            this.message.textContent = this.game.textLevel[Math.floor(Math.random() * 5)];
+            setTimeout(function () {
+              _this5.message.textContent = _this5.game.textDefault;
+
+              _this5.nextLevel();
             }, 2000);
           }
         }
       }
+    }
+  }, {
+    key: "updateScore",
+    value: function updateScore() {
+      this.game.count < 10 ? this.score.textContent = '0' + this.game.count : this.score.textContent = this.game.count;
     }
   }, {
     key: "nextLevel",
@@ -334,7 +360,7 @@ function (_HTMLElement) {
   }, {
     key: "render",
     value: function render() {
-      this.shadowRoot.innerHTML = "\n            <style>\n                @import \"app.css\";\n            </style>\n            <div id=\"container\">\n                <div class=\"colors green\" id=\"0\"></div>\n                <div class=\"colors red\" id=\"1\"></div>\n                <div class=\"colors yellow\" id=\"2\"></div>\n                <div class=\"colors blue\" id=\"3\"></div>\n                <div id=\"center\">\n                    <div id=\"counter\">\n                        <h1 id=\"count\">0</h1>\n                    </div>\n                    <h1>simon</h1>\n                    <div id=\"message\"></div>\n                    <div id=\"starter\">\n                        <a href=\"#\" id=\"start\" class=\"myButton\">Start Game</a>\n                    </div>\n                </div>\n            </div>\n\n            <audio src=\"https://s3.amazonaws.com/freecodecamp/simonSound1.mp3\"></audio>\n            <audio src=\"https://s3.amazonaws.com/freecodecamp/simonSound2.mp3\"></audio>\n            <audio src=\"https://s3.amazonaws.com/freecodecamp/simonSound3.mp3\"></audio>\n            <audio src=\"https://s3.amazonaws.com/freecodecamp/simonSound4.mp3\"></audio>\n        ";
+      this.shadowRoot.innerHTML = "\n            <style>\n                @import \"app.css\";\n            </style>\n            <div class=\"leaderboard\">\n                <h3>Current High Score</h3>\n                <div class=\"highscore\">\n                    <span><strong>Name:</strong></span><span class=\"highscorename\"></span><span><strong>Score:</strong></span><span class=\"highscorenum\"></span>\n                </div>\n            </div>\n            <div class=\"controls\">\n            <a class=\"btn startgame\" href=\"#\"><i class=\"fa fa-play-circle-o\" aria-hidden=\"true\"></i> Start</a>\n            <span class=\"score\" id=\"score\">00</span>\n            <a class=\"btn startgame\" href=\"#\"><i class=\"fa fa-refresh\" aria-hidden=\"true\"></i> Reset</a>\n            </div>\n            <div id=\"container\">\n                <div class=\"colors green\" id=\"0\"></div>\n                <div class=\"colors red\" id=\"1\"></div>\n                <div class=\"colors yellow\" id=\"2\"></div>\n                <div class=\"colors blue\" id=\"3\"></div>\n                <div id=\"center\">\n                    <div id=\"message\">Simon</div>\n                </div>\n            </div>\n\n            <audio src=\"https://s3.amazonaws.com/freecodecamp/simonSound1.mp3\"></audio>\n            <audio src=\"https://s3.amazonaws.com/freecodecamp/simonSound2.mp3\"></audio>\n            <audio src=\"https://s3.amazonaws.com/freecodecamp/simonSound3.mp3\"></audio>\n            <audio src=\"https://s3.amazonaws.com/freecodecamp/simonSound4.mp3\"></audio>\n        ";
     }
   }]);
 
@@ -344,13 +370,14 @@ function (_HTMLElement) {
 /***/ }),
 
 /***/ 0:
-/*!*****************************************!*\
-  !*** multi ./src/app.js ./src/app.scss ***!
-  \*****************************************/
+/*!***********************************************************!*\
+  !*** multi ./src/app.js ./src/global.scss ./src/app.scss ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/app.js */"./src/app.js");
+__webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/global.scss */"./src/global.scss");
 module.exports = __webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/app.scss */"./src/app.scss");
 
 

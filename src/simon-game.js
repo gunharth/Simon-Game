@@ -5,23 +5,32 @@ export class SimonGame extends HTMLElement {
 
         // game settings
         this.game = {
+            rounds: 5, // default 20 rounds to go
             count: 0,
             options: [0, 1, 2, 3],
             gameSeq: [],
             playerSeq: [],
             lock: true,
-            textStart: 'Start game',
-            textLevel: 'Next level',
-            textAgain: 'Try again?',
+            // textStart: 'Start',
+            textDefault: 'Simon says',
+            textLevel: [
+                'Good!',
+                'Awesome!',
+                'Well done!',
+                'Great!',
+                'Fantastic!',
+                'Bligh me!'
+            ],
+            textAgain: 'Sorry!',
             textWinner: 'Wohoo!<br>You won!',
         }
 
         // game fields and buttons
-        this.countField;
+        this.score;
         this.colors;
         this.sounds;
         this.message;
-        this.startButton;
+        this.startGame;
 
     }
 
@@ -29,16 +38,22 @@ export class SimonGame extends HTMLElement {
 
         this.render();
         // init game fields and buttons
-        this.countField = this.shadowRoot.querySelector('#count');
+        this.score = this.shadowRoot.querySelector('#score');
         this.colors = this.shadowRoot.querySelectorAll('.colors');
         this.sounds = this.shadowRoot.querySelectorAll('audio');
         this.message = this.shadowRoot.querySelector('#message');
-        this.startButton = this.shadowRoot.querySelector('#start');
+        this.startGame = this.shadowRoot.querySelectorAll('.startgame');
 
         // event handlers
-        this.startButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.newGame();
+        // this.startGame.addEventListener('click', (e) => {
+        //     e.preventDefault();
+        //     this.newGame();
+        // });
+        this.startGame.forEach((start) => {
+            start.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.newGame();
+            });
         });
 
         this.colors.forEach((color) => {
@@ -53,19 +68,21 @@ export class SimonGame extends HTMLElement {
     clearGame() {
         this.game.gameSeq = [];
         this.game.count = 0;
-        this.game.lock = true;
-        this.startButton.textContent = this.game.textStart;
-        this.message.textContent = '';
+        this.updateScore();
+        // this.game.lock = true;
+        // this.startGame.textContent = this.game.textStart;
+        this.message.textContent = this.game.textDefault;
         this.addCount();
     }
 
     addCount() {
         this.game.count++;
-        this.countField.classList.add('fade');
-        this.countField.textContent = this.game.count;
-        setTimeout(() => {
-            this.countField.classList.remove('fade');
-        }, 750);
+        this.game.lock = true;
+        // this.score.classList.add('fade');
+        // this.score.textContent = this.game.count;
+        // setTimeout(() => {
+        //     this.score.classList.remove('fade');
+        // }, 750);
         this.addToGameSeq();
     }
 
@@ -119,25 +136,31 @@ export class SimonGame extends HTMLElement {
 
     checkPlayerSeq(id) {
         if (this.game.playerSeq[this.game.playerSeq.length - 1] !== this.game.gameSeq[this.game.playerSeq.length - 1]) {
-            this.message.textContent = `Congratulations you did ${this.game.count} turns!`;
-            this.startButton.textContent = 'Restart game';
+            this.message.innerHTML = ` ¯\\_(ツ)_/¯<br>You did ${this.game.count-1} turns!`;
             this.game.lock = true;
         } else {
             this.sounds[id].play();
             var check = this.game.playerSeq.length === this.game.gameSeq.length;
             if (check) {
-                if (this.game.count == 2) {
+                this.updateScore();
+                if (this.game.count == this.game.rounds) {
                     this.message.innerHTML = this.game.textWinner;
-                    this.startButton.textContent = this.game.textStart;
                 } else {
-                    this.message.textContent = this.game.textLevel;
+                    this.game.lock = true;
+                    this.message.textContent = this.game.textLevel[(Math.floor(Math.random() * 5))];
                     setTimeout(() => {
-                        this.message.textContent = '';
+                        this.message.textContent = this.game.textDefault;
                         this.nextLevel();
                     }, 2000);
                 }
             }
         }
+    }
+
+    updateScore() {
+        (this.game.count < 10) ?
+            this.score.textContent = '0' + this.game.count :
+            this.score.textContent = this.game.count;
     }
 
     nextLevel() {
@@ -149,20 +172,24 @@ export class SimonGame extends HTMLElement {
             <style>
                 @import "app.css";
             </style>
+            <div class="leaderboard">
+                <h3>Current High Score</h3>
+                <div class="highscore">
+                    <span><strong>Name:</strong></span><span class="highscorename"></span><span><strong>Score:</strong></span><span class="highscorenum"></span>
+                </div>
+            </div>
+            <div class="controls">
+            <a class="btn startgame" href="#"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Start</a>
+            <span class="score" id="score">00</span>
+            <a class="btn startgame" href="#"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</a>
+            </div>
             <div id="container">
                 <div class="colors green" id="0"></div>
                 <div class="colors red" id="1"></div>
                 <div class="colors yellow" id="2"></div>
                 <div class="colors blue" id="3"></div>
                 <div id="center">
-                    <div id="counter">
-                        <h1 id="count">0</h1>
-                    </div>
-                    <h1>simon</h1>
-                    <div id="message"></div>
-                    <div id="starter">
-                        <a href="#" id="start" class="myButton">Start Game</a>
-                    </div>
+                    <div id="message">Simon</div>
                 </div>
             </div>
 

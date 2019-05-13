@@ -12,6 +12,7 @@ let mix = require('laravel-mix');
  */
 
 mix.js('src/app.js', 'public/');
+mix.sass('src/global.scss', 'public/');
 mix.sass('src/app.scss', 'public/');
 mix.copy('src/index.html', 'public/');
 
