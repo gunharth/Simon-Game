@@ -1,3 +1,3 @@
 import { SimonGame } from './simon-game.js';
 
-let game = new SimonGame();
+customElements.define('simon-game', SimonGame);

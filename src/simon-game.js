@@ -1,5 +1,8 @@
-export class SimonGame {
+export class SimonGame extends HTMLElement {
     constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+
         // game settings
         this.game = {
             count: 0,
@@ -14,16 +17,30 @@ export class SimonGame {
         }
 
         // game fields and buttons
-        this.countField = document.querySelector('#count');
-        this.colors = document.querySelectorAll('.colors');
-        this.message = document.querySelector('#message');
-        this.startButton = document.querySelector('#start');
+        this.countField;
+        this.colors;
+        this.sounds;
+        this.message;
+        this.startButton;
 
-        // event listeners
+    }
+
+    connectedCallback() {
+
+        this.render();
+        // init game fields and buttons
+        this.countField = this.shadowRoot.querySelector('#count');
+        this.colors = this.shadowRoot.querySelectorAll('.colors');
+        this.sounds = this.shadowRoot.querySelectorAll('audio');
+        this.message = this.shadowRoot.querySelector('#message');
+        this.startButton = this.shadowRoot.querySelector('#start');
+
+        // event handlers
         this.startButton.addEventListener('click', (e) => {
             e.preventDefault();
             this.newGame();
-        })
+        });
+
         this.colors.forEach((color) => {
             color.addEventListener('click', (e) => this.handlePlayerClick(e));
         });
@@ -75,20 +92,23 @@ export class SimonGame {
     }
 
     playGame(id) {
-        document.getElementsByClassName(id)[0].play();
-        document.getElementById(id).classList.add('active');
-        setTimeout(function () {
-            document.getElementById(id).classList.remove('active');
+        this.sounds[id].play();
+        this.colors[id].classList.add('active');
+        setTimeout(() => {
+            this.colors[id].classList.remove('active');
         }, 300);
     }
 
     handlePlayerClick(e) {
         e.preventDefault();
         if (!this.game.lock) {
-            document.getElementsByClassName(e.target.id)[0].play();
-            e.target.classList.add('active');
-            setTimeout(() => e.target.classList.remove('active'), 300);
-            this.addToPlayerSeq(+e.target.id);
+            let target = e.target;
+            this.sounds[target.id].play();
+            target.classList.add('active');
+            setTimeout(() => {
+                target.classList.remove('active')
+            }, 300);
+            this.addToPlayerSeq(+target.id);
         }
     }
 
@@ -103,7 +123,7 @@ export class SimonGame {
             this.startButton.textContent = 'Restart game';
             this.game.lock = true;
         } else {
-            document.getElementsByClassName(id)[0].play();
+            this.sounds[id].play();
             var check = this.game.playerSeq.length === this.game.gameSeq.length;
             if (check) {
                 if (this.game.count == 2) {
@@ -123,4 +143,33 @@ export class SimonGame {
     nextLevel() {
         this.addCount();
     }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+            <style>
+                @import "app.css";
+            </style>
+            <div id="container">
+                <div class="colors green" id="0"></div>
+                <div class="colors red" id="1"></div>
+                <div class="colors yellow" id="2"></div>
+                <div class="colors blue" id="3"></div>
+                <div id="center">
+                    <div id="counter">
+                        <h1 id="count">0</h1>
+                    </div>
+                    <h1>simon</h1>
+                    <div id="message"></div>
+                    <div id="starter">
+                        <a href="#" id="start" class="myButton">Start Game</a>
+                    </div>
+                </div>
+            </div>
+
+            <audio src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></audio>
+            <audio src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"></audio>
+            <audio src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></audio>
+            <audio src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></audio>
+        `;
+    };
 }
