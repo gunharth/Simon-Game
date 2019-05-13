@@ -57,6 +57,7 @@ export class SimonGame extends HTMLElement {
         });
 
         this.colors.forEach((color) => {
+            color.addEventListener('touchstart', (e) => this.handlePlayerClick(e));
             color.addEventListener('click', (e) => this.handlePlayerClick(e));
         });
     }
@@ -141,6 +142,7 @@ export class SimonGame extends HTMLElement {
                 this.updateScore();
                 if (this.game.count == this.game.rounds) {
                     this.message.innerHTML = this.game.textWinner;
+                    this.game.lock = true;
                 } else {
                     this.game.lock = true;
                     this.message.textContent = this.game.textLevel[(Math.floor(Math.random() * 5))];

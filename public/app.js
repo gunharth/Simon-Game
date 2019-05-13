@@ -224,6 +224,9 @@ function (_HTMLElement) {
         });
       });
       this.colors.forEach(function (color) {
+        color.addEventListener('touchstart', function (e) {
+          return _this2.handlePlayerClick(e);
+        });
         color.addEventListener('click', function (e) {
           return _this2.handlePlayerClick(e);
         });
@@ -331,6 +334,7 @@ function (_HTMLElement) {
 
           if (this.game.count == this.game.rounds) {
             this.message.innerHTML = this.game.textWinner;
+            this.game.lock = true;
           } else {
             this.game.lock = true;
             this.message.textContent = this.game.textLevel[Math.floor(Math.random() * 5)];
