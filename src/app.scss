@@ -14,15 +14,6 @@ $blue-light: #5e92f3;
 $yellow: #fbc02d;
 $yellow-light: #fff263;
 
-// body {
-//     height: 100vh;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     font-family: Arial, Helvetica, sans-serif;
-//     background-image: linear-gradient(to right top, #8a8a8a, #808080, #767676, #6c6c6c, #626262);
-// }
-
 h1,
 h2,
 h3 {
@@ -39,17 +30,17 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    display: none;
+    // display: none;
 }
 
 .controls {
     margin-bottom: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .btn {
-    margin: 10px;
+    margin: 10px 0;
     padding: 5px 25px;
     background: #FFFFFF;
     border: none;
@@ -69,24 +60,22 @@ a.btn:active {
 
 .score {
     font-size: 40px;
-    margin: 0 25px;
 }
 
-#container {
+#gamepad {
     position: relative;
     width: 530px;
     height: 530px;
     background: #313131;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 255px);
+    grid-template-rows: repeat(2, 255px);
     grid-gap: 20px 20px;
     border-radius: 50%;
     box-shadow: 0 0 5px 2px #111;
 }
 
 .colors {
-    width: 235px;
-    height: 235px;
     box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, .7),
         inset -2px -2px 8px 6px rgba(0, 0, 0, .3),
         inset 3px 3px 8px 5px rgba(255, 255, 255, .4);
@@ -176,14 +165,71 @@ a.btn:active {
     font-size: 2em;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 534px) {
 
-    #container,
-    .leaderboard,
-    .controls {
-        transform: scale(0.65);
-        // transform-origin: 0 0;
-        // margin-left: -160px;
-        // left: 50%;
+    #gamepad {
+        // width: 100%;
+        // height: 100%;
+        // grid-template-columns: repeat(2, 50%);
+        // grid-template-rows: repeat(2, auto);
+        transform: scale(0.8)
+    }
+
+    #center {
+        width: 170px;
+        height: 170px;
+        line-height: 1.5em;
+        font-size: 1.6em;
+    }
+}
+
+@media screen and (max-width: 440px) {
+
+    #gamepad {
+        width: 320px;
+        height: 320px;
+        grid-template-columns: repeat(2, 150px);
+        grid-template-rows: repeat(2, 150px);
+    }
+
+    #center {
+        width: 100px;
+        height: 100px;
+        line-height: 1.5em;
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 414px) {
+
+    #gamepad {
+        width: 320px;
+        height: 320px;
+        grid-template-columns: repeat(2, 150px);
+        grid-template-rows: repeat(2, 150px);
+    }
+
+    #center {
+        width: 100px;
+        height: 100px;
+        line-height: 1.5em;
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 320px) and (orientation : portrait) {
+
+    #gamepad {
+        width: 320px;
+        height: 320px;
+        grid-template-columns: repeat(2, 150px);
+        grid-template-rows: repeat(2, 150px);
+    }
+
+    #center {
+        width: 100px;
+        height: 100px;
+        line-height: 1.5em;
+        font-size: 1em;
     }
 }

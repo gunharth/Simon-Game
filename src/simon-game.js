@@ -165,9 +165,7 @@ export class SimonGame extends HTMLElement {
 
     render() {
         this.shadowRoot.innerHTML = `
-            <style>
-                @import "app.css";
-            </style>
+            <link rel="stylesheet" href="app.css">
             <div class="leaderboard">
                 <h3>Current High Score</h3>
                 <div class="highscore">
@@ -175,11 +173,11 @@ export class SimonGame extends HTMLElement {
                 </div>
             </div>
             <div class="controls">
-            <a class="btn startgame" href="#"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Start</a>
+            <a class="btn startgame" href="#">Start</a>
             <span class="score" id="score">00</span>
-            <a class="btn startgame" href="#"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</a>
+            <a class="btn startgame" href="#">Reset</a>
             </div>
-            <div id="container">
+            <div id="gamepad">
                 <div class="colors green" id="0"></div>
                 <div class="colors red" id="1"></div>
                 <div class="colors yellow" id="2"></div>
@@ -188,7 +186,6 @@ export class SimonGame extends HTMLElement {
                     <div id="message">Simon</div>
                 </div>
             </div>
-
             <audio src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></audio>
             <audio src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"></audio>
             <audio src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></audio>
