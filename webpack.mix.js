@@ -15,7 +15,7 @@ mix.js('src/app.js', 'public/');
 mix.sass('src/global.scss', 'public/');
 mix.sass('src/app.scss', 'public/');
 mix.copy('src/index.html', 'public/');
-mix.js('src/sw.js', 'public/');
+mix.copy('src/sw.js', 'public/');
 
 // mix.webpackConfig({
 //     plugins: [
