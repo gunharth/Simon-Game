@@ -239,9 +239,7 @@ function (_HTMLElement) {
     value: function clearGame() {
       this.game.gameSeq = [];
       this.game.count = 0;
-      this.updateScore(); // this.game.lock = true;
-      // this.startGame.textContent = this.game.textStart;
-
+      this.updateScore();
       this.message.textContent = this.game.textDefault;
       this.addCount();
     }
@@ -249,12 +247,7 @@ function (_HTMLElement) {
     key: "addCount",
     value: function addCount() {
       this.game.count++;
-      this.game.lock = true; // this.score.classList.add('fade');
-      // this.score.textContent = this.game.count;
-      // setTimeout(() => {
-      //     this.score.classList.remove('fade');
-      // }, 750);
-
+      this.game.lock = true;
       this.addToGameSeq();
     }
   }, {
@@ -276,15 +269,12 @@ function (_HTMLElement) {
 
         if (i >= _this3.game.gameSeq.length) {
           clearInterval(moves);
+          setTimeout(function () {
+            _this3.message.textContent = 'Your turn!';
+          }, 700);
         }
       }, 700);
       this.clearPlayerSeq();
-    }
-  }, {
-    key: "clearPlayerSeq",
-    value: function clearPlayerSeq() {
-      this.game.lock = false;
-      this.game.playerSeq = [];
     }
   }, {
     key: "playGame",
@@ -296,6 +286,12 @@ function (_HTMLElement) {
       setTimeout(function () {
         _this4.colors[id].classList.remove('active');
       }, 300);
+    }
+  }, {
+    key: "clearPlayerSeq",
+    value: function clearPlayerSeq() {
+      this.game.lock = false;
+      this.game.playerSeq = [];
     }
   }, {
     key: "handlePlayerClick",

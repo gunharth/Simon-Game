@@ -69,8 +69,6 @@ export class SimonGame extends HTMLElement {
         this.game.gameSeq = [];
         this.game.count = 0;
         this.updateScore();
-        // this.game.lock = true;
-        // this.startGame.textContent = this.game.textStart;
         this.message.textContent = this.game.textDefault;
         this.addCount();
     }
@@ -78,11 +76,6 @@ export class SimonGame extends HTMLElement {
     addCount() {
         this.game.count++;
         this.game.lock = true;
-        // this.score.classList.add('fade');
-        // this.score.textContent = this.game.count;
-        // setTimeout(() => {
-        //     this.score.classList.remove('fade');
-        // }, 750);
         this.addToGameSeq();
     }
 
@@ -98,14 +91,12 @@ export class SimonGame extends HTMLElement {
             i++;
             if (i >= this.game.gameSeq.length) {
                 clearInterval(moves);
+                setTimeout(() => {
+                    this.message.textContent = 'Your turn!';
+                }, 700);
             }
         }, 700)
         this.clearPlayerSeq();
-    }
-
-    clearPlayerSeq() {
-        this.game.lock = false;
-        this.game.playerSeq = [];
     }
 
     playGame(id) {
@@ -114,6 +105,11 @@ export class SimonGame extends HTMLElement {
         setTimeout(() => {
             this.colors[id].classList.remove('active');
         }, 300);
+    }
+
+    clearPlayerSeq() {
+        this.game.lock = false;
+        this.game.playerSeq = [];
     }
 
     handlePlayerClick(e) {
