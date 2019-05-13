@@ -1,6 +1,12 @@
 {
-    "name": "Simon",
+    "name": "Simon Game PWA",
     "short_name": "Simon",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "description": "Simon Game PWA",
     "icons": [
         {
             "src": "/favicons/android-chrome-192x192.png",
@@ -12,8 +18,5 @@
             "sizes": "384x384",
             "type": "image/png"
         }
-    ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "display": "standalone"
+    ]
 }
