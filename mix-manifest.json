@@ -2,6 +2,6 @@
     "/public/app.js": "/public/app.js",
     "/public/global.css": "/public/global.css",
     "/public/app.css": "/public/app.css",
-    "/public/sw.js": "/public/sw.js",
-    "/public/index.html": "/public/index.html"
+    "/public/index.html": "/public/index.html",
+    "/public/sw.js": "/public/sw.js"
 }
