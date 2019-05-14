@@ -516,7 +516,7 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: Verdana, Arial, Helvetica, sans-serif;
-  background: #000;
+  background: linear-gradient(to right, #fff, #e2e2e2);
 }
 
 h1 {
