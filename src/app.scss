@@ -18,6 +18,30 @@ h1 {
     text-shadow: 1px 1px 5px #000000;
 }
 
+#installprompt {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: none;
+    z-index: 1;
+    font-style: normal;
+
+}
+
+#installprompt svg {
+    height: 40px;
+    width: 40px;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 header {
     width: 100%;
     height: 60px;
@@ -27,6 +51,7 @@ header {
     justify-content: center;
     align-items: center;
     font-style: italic;
+    position: relative;
     box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .8);
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2e7d32+0,ff5f52+25,1565c0+50,fbc02d+100 */
     background: #2e7d32;
