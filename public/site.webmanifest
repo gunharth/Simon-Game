@@ -4,6 +4,7 @@
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "display": "standalone",
+    "orientation": "portrait",
     "scope": "/",
     "start_url": "/",
     "description": "Simon Game PWA",
@@ -16,6 +17,11 @@
         {
             "src": "/favicons/android-chrome-384x384.png",
             "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/icon-512x512.png",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ]
