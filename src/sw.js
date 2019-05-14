@@ -22,6 +22,21 @@ self.addEventListener('install', function (e) {
     );
 });
 
+self.addEventListener('activate', function (e) {
+    console.log('[ServiceWorker] Activate');
+    e.waitUntil(
+        caches.keys().then(function (keyList) {
+            return Promise.all(keyList.map(function (key) {
+                if (key !== 'simon-pwa-v1') {
+                    console.log('[ServiceWorker] Removing old cache', key);
+                    return caches.delete(key);
+                }
+            }));
+        })
+    );
+    return self.clients.claim();
+});
+
 
 self.addEventListener('fetch', function (e) {
     e.respondWith(
