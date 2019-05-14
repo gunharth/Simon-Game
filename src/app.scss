@@ -1,235 +1,79 @@
-// @import "../node_modules/normalize-scss/sass/normalize/import-now";
+@import "../node_modules/normalize-scss/sass/normalize/import-now";
 
-// * {
-//     outline: none;
-// }
-
-$green: #2e7d32;
-$green-light: #60ad5e;
-$green-dark: #005005;
-$red: #c62828;
-$red-light: #ff5f52;
-$blue: #1565c0;
-$blue-light: #5e92f3;
-$yellow: #fbc02d;
-$yellow-light: #fff263;
-
-h1,
-h2,
-h3 {
-    margin: 2px;
-    // display: inline-block;
-    color: #1a1a1a;
+* {
+    outline: none;
 }
 
-h3 {
-    font-size: 1.17em;
-}
-
-.leaderboard {
+body {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // display: none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    background: linear-gradient(to right, #fff, #e2e2e2);
 }
 
-.controls {
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-around;
-}
-
-.btn {
-    margin: 10px 0;
-    padding: 5px 25px;
-    background: #FFFFFF;
-    border: none;
-    font-size: 18px;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #000000;
-    border: 1px solid #000000;
-    border-radius: 10px;
-}
-
-a.btn:active {
-    background: #4554FF;
-    color: #FFFFFF;
-    border: 1px solid #EEEEEE;
-}
-
-.score {
-    font-size: 40px;
-}
-
-#gamepad {
-    position: relative;
-    width: 530px;
-    height: 530px;
-    background: #313131;
-    display: grid;
-    grid-template-columns: repeat(2, 255px);
-    grid-template-rows: repeat(2, 255px);
-    grid-gap: 20px 20px;
-    border-radius: 50%;
-    box-shadow: 0 0 5px 2px #111;
-}
-
-.colors {
-    box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, .7),
-        inset -2px -2px 8px 6px rgba(0, 0, 0, .3),
-        inset 3px 3px 8px 5px rgba(255, 255, 255, .4);
-}
-
-.green {
-    background: $green;
-    border-top-left-radius: 100%;
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-.green:hover {
-    background: $green-light;
-}
-
-.green.active {
-    background: rgb(13, 255, 0)
-}
-
-.red {
-    background: $red;
-    border-top-right-radius: 100%;
-    margin-top: 20px;
-    margin-right: 20px;
-}
-
-.red:hover {
-    background: $red-light;
-}
-
-.red.active {
-    background: rgb(255, 0, 0)
-}
-
-.yellow {
-    background: $yellow;
-    border-bottom-left-radius: 100%;
-    margin-bottom: 20px;
-    margin-left: 20px;
-}
-
-.yellow:hover {
-    background: $yellow-light;
-}
-
-.yellow.active {
-    background: rgb(255, 247, 0)
-}
-
-.blue {
-    background: $blue;
-    border-bottom-right-radius: 100%;
-    margin-bottom: 20px;
-    margin-right: 20px;
-}
-
-.blue:hover {
-    background: $blue-light;
-}
-
-.blue.active {
-    background: rgb(30, 144, 255)
-}
-
-.colors:hover {
-    cursor: pointer;
-}
-
-
-#center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: #ddd;
-    box-shadow: 0 0 2px 19px #313131;
-    // box-shadow: 0 0 5px 2px #111;
-    text-align: center;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    line-height: 1.5em;
+h1 {
     font-size: 2em;
+    text-shadow: 1px 1px 5px #000000;
 }
 
-@media screen and (max-width: 534px) {
-
-    #gamepad {
-        // width: 100%;
-        // height: 100%;
-        // grid-template-columns: repeat(2, 50%);
-        // grid-template-rows: repeat(2, auto);
-        transform: scale(0.8)
-    }
-
-    #center {
-        width: 170px;
-        height: 170px;
-        line-height: 1.5em;
-        font-size: 1.6em;
-    }
+header {
+    width: 100%;
+    height: 60px;
+    background: #4554FF;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .8);
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2e7d32+0,ff5f52+25,1565c0+50,fbc02d+100 */
+    background: #2e7d32;
+    /* Old browsers */
+    background: -moz-linear-gradient(left, #2e7d32 0%, #ff5f52 25%, #1565c0 50%, #fbc02d 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #2e7d32 0%, #ff5f52 25%, #1565c0 50%, #fbc02d 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #2e7d32 0%, #ff5f52 25%, #1565c0 50%, #fbc02d 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e7d32', endColorstr='#fbc02d', GradientType=1);
+    /* IE6-9 */
 }
 
-@media screen and (max-width: 440px) {
-
-    #gamepad {
-        width: 320px;
-        height: 320px;
-        grid-template-columns: repeat(2, 150px);
-        grid-template-rows: repeat(2, 150px);
-    }
-
-    #center {
-        width: 100px;
-        height: 100px;
-        line-height: 1.5em;
-        font-size: 1em;
-    }
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
 }
 
-@media screen and (max-width: 414px) {
-
-    #gamepad {
-        width: 320px;
-        height: 320px;
-        grid-template-columns: repeat(2, 150px);
-        grid-template-rows: repeat(2, 150px);
-    }
-
-    #center {
-        width: 100px;
-        height: 100px;
-        line-height: 1.5em;
-        font-size: 1em;
-    }
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    background: #171717;
+    margin-top: auto;
+    color: #FFFFFF;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .8);
+    font-size: 18px;
 }
 
-@media screen and (max-width: 320px) and (orientation : portrait) {
+footer a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #FFFFFF;
+    text-decoration: none;
+}
 
-    #gamepad {
-        width: 320px;
-        height: 320px;
-        grid-template-columns: repeat(2, 150px);
-        grid-template-rows: repeat(2, 150px);
-    }
+svg {
+    width: 25px;
+    margin-right: 20px;
+}
 
-    #center {
-        width: 100px;
-        height: 100px;
-        line-height: 1.5em;
-        font-size: 1em;
-    }
+path {
+    fill: #fff;
 }

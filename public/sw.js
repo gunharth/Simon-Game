@@ -7,7 +7,7 @@ self.addEventListener('install', function (e) {
                     '/',
                     'index.html',
                     'app.css',
-                    'global.css',
+                    'simon-game.css',
                     'app.js',
                     'audio/simonSound1.mp3',
                     'audio/simonSound2.mp3',

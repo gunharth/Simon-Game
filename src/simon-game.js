@@ -167,7 +167,7 @@ export class SimonGame extends HTMLElement {
 
     render() {
         this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="app.css">
+            <link rel="stylesheet" href="simon-game.css">
             <div class="leaderboard">
                 <h3>Current High Score</h3>
                 <div class="highscore">

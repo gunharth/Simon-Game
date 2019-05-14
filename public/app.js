@@ -99,23 +99,18 @@ __webpack_require__.r(__webpack_exports__);
 
 customElements.define('simon-game', _simon_game_js__WEBPACK_IMPORTED_MODULE_0__["SimonGame"]);
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(function () {
+    console.log("Service Worker Registered");
+  });
+}
+
 /***/ }),
 
 /***/ "./src/app.scss":
 /*!**********************!*\
   !*** ./src/app.scss ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./src/global.scss":
-/*!*************************!*\
-  !*** ./src/global.scss ***!
-  \*************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -358,7 +353,7 @@ function (_HTMLElement) {
   }, {
     key: "render",
     value: function render() {
-      this.shadowRoot.innerHTML = "\n            <link rel=\"stylesheet\" href=\"app.css\">\n            <div class=\"leaderboard\">\n                <h3>Current High Score</h3>\n                <div class=\"highscore\">\n                    <span><strong>Name:</strong></span><span class=\"highscorename\"></span><span><strong>Score:</strong></span><span class=\"highscorenum\"></span>\n                </div>\n            </div>\n            <div class=\"controls\">\n            <a class=\"btn startgame\" href=\"#\">Start</a>\n            <span class=\"score\" id=\"score\">00</span>\n            <a class=\"btn startgame\" href=\"#\">Reset</a>\n            </div>\n            <div id=\"gamepad\">\n                <div class=\"colors green\" id=\"0\"></div>\n                <div class=\"colors red\" id=\"1\"></div>\n                <div class=\"colors yellow\" id=\"2\"></div>\n                <div class=\"colors blue\" id=\"3\"></div>\n                <div id=\"center\">\n                    <div id=\"message\">Simon</div>\n                </div>\n            </div>\n            <audio src=\"audio/simonSound1.mp3\"></audio>\n            <audio src=\"audio/simonSound2.mp3\"></audio>\n            <audio src=\"audio/simonSound3.mp3\"></audio>\n            <audio src=\"audio/simonSound4.mp3\"></audio>\n        ";
+      this.shadowRoot.innerHTML = "\n            <link rel=\"stylesheet\" href=\"simon-game.css\">\n            <div class=\"leaderboard\">\n                <h3>Current High Score</h3>\n                <div class=\"highscore\">\n                    <span><strong>Name:</strong></span><span class=\"highscorename\"></span><span><strong>Score:</strong></span><span class=\"highscorenum\"></span>\n                </div>\n            </div>\n            <div class=\"controls\">\n            <a class=\"btn startgame\" href=\"#\">Start</a>\n            <span class=\"score\" id=\"score\">00</span>\n            <a class=\"btn startgame\" href=\"#\">Reset</a>\n            </div>\n            <div id=\"gamepad\">\n                <div class=\"colors green\" id=\"0\"></div>\n                <div class=\"colors red\" id=\"1\"></div>\n                <div class=\"colors yellow\" id=\"2\"></div>\n                <div class=\"colors blue\" id=\"3\"></div>\n                <div id=\"center\">\n                    <div id=\"message\">Simon</div>\n                </div>\n            </div>\n            <audio src=\"audio/simonSound1.mp3\"></audio>\n            <audio src=\"audio/simonSound2.mp3\"></audio>\n            <audio src=\"audio/simonSound3.mp3\"></audio>\n            <audio src=\"audio/simonSound4.mp3\"></audio>\n        ";
     }
   }]);
 
@@ -367,15 +362,26 @@ function (_HTMLElement) {
 
 /***/ }),
 
+/***/ "./src/simon-game.scss":
+/*!*****************************!*\
+  !*** ./src/simon-game.scss ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!***********************************************************!*\
-  !*** multi ./src/app.js ./src/global.scss ./src/app.scss ***!
-  \***********************************************************/
+/*!***************************************************************!*\
+  !*** multi ./src/app.js ./src/simon-game.scss ./src/app.scss ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/app.js */"./src/app.js");
-__webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/global.scss */"./src/global.scss");
+__webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/simon-game.scss */"./src/simon-game.scss");
 module.exports = __webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/app.scss */"./src/app.scss");
 
 
