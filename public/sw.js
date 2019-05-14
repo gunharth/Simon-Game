@@ -14,6 +14,7 @@ self.addEventListener('install', function (e) {
                     'audio/simonSound3.mp3',
                     'audio/simonSound4.mp3',
                     'favicon.ico',
+                    'favicons/icon-512x512.png',
                     'favicons/android-chrome-192x192.png',
                     'favicons/android-chrome-384x384.png',
                     'favicons/apple-touch-icon.png',
