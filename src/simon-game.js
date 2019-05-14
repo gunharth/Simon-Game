@@ -188,10 +188,10 @@ export class SimonGame extends HTMLElement {
                     <div id="message">Simon</div>
                 </div>
             </div>
-            <audio src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></audio>
-            <audio src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"></audio>
-            <audio src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></audio>
-            <audio src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></audio>
+            <audio src="audio/simonSound1.mp3"></audio>
+            <audio src="audio/simonSound2.mp3"></audio>
+            <audio src="audio/simonSound3.mp3"></audio>
+            <audio src="audio/simonSound4.mp3"></audio>
         `;
     };
 }
