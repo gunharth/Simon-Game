@@ -1,6 +1,7 @@
+const swCache = 'simon-pwa-v1';
 self.addEventListener('install', function (e) {
     e.waitUntil(
-        caches.open('simon-pwa-v1')
+        caches.open(swCache)
             .then(function (cache) {
                 return cache.addAll([
                     '/',
@@ -27,7 +28,7 @@ self.addEventListener('activate', function (e) {
     e.waitUntil(
         caches.keys().then(function (keyList) {
             return Promise.all(keyList.map(function (key) {
-                if (key !== 'simon-pwa-v1') {
+                if (key !== swCache) {
                     console.log('[ServiceWorker] Removing old cache', key);
                     return caches.delete(key);
                 }
