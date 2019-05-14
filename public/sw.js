@@ -1,4 +1,4 @@
-const swCache = 'simon-pwa-v1';
+const swCache = 'simon-pwa-v2';
 self.addEventListener('install', function (e) {
     e.waitUntil(
         caches.open(swCache)
