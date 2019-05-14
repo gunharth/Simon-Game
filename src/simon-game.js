@@ -57,7 +57,7 @@ export class SimonGame extends HTMLElement {
         });
 
         this.colors.forEach((color) => {
-            color.addEventListener('touchstart', (e) => this.handlePlayerClick(e));
+            //color.addEventListener('touchstart', (e) => this.handlePlayerClick(e), { passive: true });
             color.addEventListener('click', (e) => this.handlePlayerClick(e));
         });
     }

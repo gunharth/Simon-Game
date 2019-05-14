@@ -224,9 +224,7 @@ function (_HTMLElement) {
         });
       });
       this.colors.forEach(function (color) {
-        color.addEventListener('touchstart', function (e) {
-          return _this2.handlePlayerClick(e);
-        });
+        //color.addEventListener('touchstart', (e) => this.handlePlayerClick(e), { passive: true });
         color.addEventListener('click', function (e) {
           return _this2.handlePlayerClick(e);
         });
