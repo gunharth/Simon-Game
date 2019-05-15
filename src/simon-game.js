@@ -28,10 +28,15 @@ export class SimonGame extends HTMLElement {
         // game fields and buttons
         this.score;
         this.colors;
-        this.sounds;
         this.message;
         this.startGame;
 
+        this.sounds = [
+            new Audio('audio/simonSound1.mp3'),
+            new Audio('audio/simonSound2.mp3'),
+            new Audio('audio/simonSound3.mp3'),
+            new Audio('audio/simonSound4.mp3')
+        ];
     }
 
     connectedCallback() {
@@ -40,7 +45,7 @@ export class SimonGame extends HTMLElement {
         // init game fields and buttons
         this.score = this.shadowRoot.querySelector('#score');
         this.colors = this.shadowRoot.querySelectorAll('.colors');
-        this.sounds = this.shadowRoot.querySelectorAll('audio');
+        //this.sounds = this.shadowRoot.querySelectorAll('audio');
         this.message = this.shadowRoot.querySelector('#message');
         this.startGame = this.shadowRoot.querySelectorAll('.startgame');
 
@@ -188,10 +193,6 @@ export class SimonGame extends HTMLElement {
                     <div id="message">Simon</div>
                 </div>
             </div>
-            <audio src="audio/simonSound1.mp3"></audio>
-            <audio src="audio/simonSound2.mp3"></audio>
-            <audio src="audio/simonSound3.mp3"></audio>
-            <audio src="audio/simonSound4.mp3"></audio>
         `;
     };
 }

@@ -188,9 +188,9 @@ function (_HTMLElement) {
     };
     _this.score;
     _this.colors;
-    _this.sounds;
     _this.message;
     _this.startGame;
+    _this.sounds = [new Audio('audio/simonSound1.mp3'), new Audio('audio/simonSound2.mp3'), new Audio('audio/simonSound3.mp3'), new Audio('audio/simonSound4.mp3')];
     return _this;
   }
 
@@ -202,8 +202,8 @@ function (_HTMLElement) {
       this.render(); // init game fields and buttons
 
       this.score = this.shadowRoot.querySelector('#score');
-      this.colors = this.shadowRoot.querySelectorAll('.colors');
-      this.sounds = this.shadowRoot.querySelectorAll('audio');
+      this.colors = this.shadowRoot.querySelectorAll('.colors'); //this.sounds = this.shadowRoot.querySelectorAll('audio');
+
       this.message = this.shadowRoot.querySelector('#message');
       this.startGame = this.shadowRoot.querySelectorAll('.startgame'); // event handlers
       // this.startGame.addEventListener('click', (e) => {
@@ -353,7 +353,7 @@ function (_HTMLElement) {
   }, {
     key: "render",
     value: function render() {
-      this.shadowRoot.innerHTML = "\n            <link rel=\"stylesheet\" href=\"simon-game.css\">\n            <div class=\"leaderboard\">\n                <h3>Current High Score</h3>\n                <div class=\"highscore\">\n                    <span><strong>Name:</strong></span><span class=\"highscorename\"></span><span><strong>Score:</strong></span><span class=\"highscorenum\"></span>\n                </div>\n            </div>\n            <div class=\"controls\">\n            <a class=\"btn startgame\" href=\"#\">Start</a>\n            <span class=\"score\" id=\"score\">00</span>\n            <a class=\"btn startgame\" href=\"#\">Reset</a>\n            </div>\n            <div id=\"gamepad\">\n                <div class=\"colors green\" id=\"0\"></div>\n                <div class=\"colors red\" id=\"1\"></div>\n                <div class=\"colors yellow\" id=\"2\"></div>\n                <div class=\"colors blue\" id=\"3\"></div>\n                <div id=\"center\">\n                    <div id=\"message\">Simon</div>\n                </div>\n            </div>\n            <audio src=\"audio/simonSound1.mp3\"></audio>\n            <audio src=\"audio/simonSound2.mp3\"></audio>\n            <audio src=\"audio/simonSound3.mp3\"></audio>\n            <audio src=\"audio/simonSound4.mp3\"></audio>\n        ";
+      this.shadowRoot.innerHTML = "\n            <link rel=\"stylesheet\" href=\"simon-game.css\">\n            <div class=\"leaderboard\">\n                <h3>Current High Score</h3>\n                <div class=\"highscore\">\n                    <span><strong>Name:</strong></span><span class=\"highscorename\"></span><span><strong>Score:</strong></span><span class=\"highscorenum\"></span>\n                </div>\n            </div>\n            <div class=\"controls\">\n            <a class=\"btn startgame\" href=\"#\">Start</a>\n            <span class=\"score\" id=\"score\">00</span>\n            <a class=\"btn startgame\" href=\"#\">Reset</a>\n            </div>\n            <div id=\"gamepad\">\n                <div class=\"colors green\" id=\"0\"></div>\n                <div class=\"colors red\" id=\"1\"></div>\n                <div class=\"colors yellow\" id=\"2\"></div>\n                <div class=\"colors blue\" id=\"3\"></div>\n                <div id=\"center\">\n                    <div id=\"message\">Simon</div>\n                </div>\n            </div>\n        ";
     }
   }]);
 
