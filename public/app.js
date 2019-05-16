@@ -179,7 +179,7 @@ function (_HTMLElement) {
       gameSeq: [],
       playerSeq: [],
       lock: true,
-      // textStart: 'Start',
+      textStart: 'Simon',
       textDefault: 'Simon says',
       textLevel: ['Good!', 'Awesome!', 'Well done!', 'Great!', 'Fantastic!', 'Bligh me!'],
       textAgain: 'Sorry!',
@@ -187,6 +187,7 @@ function (_HTMLElement) {
 
     };
     _this.score;
+    _this.highscore;
     _this.colors;
     _this.message;
     _this.startGame;
@@ -202,24 +203,24 @@ function (_HTMLElement) {
       this.render(); // init game fields and buttons
 
       this.score = this.shadowRoot.querySelector('#score');
-      this.colors = this.shadowRoot.querySelectorAll('.colors'); //this.sounds = this.shadowRoot.querySelectorAll('audio');
-
+      this.highscore = this.shadowRoot.querySelector('#highscore');
+      this.updateHighscore(this.getHighscore());
+      this.colors = this.shadowRoot.querySelectorAll('.colors');
       this.message = this.shadowRoot.querySelector('#message');
-      this.startGame = this.shadowRoot.querySelectorAll('.startgame'); // event handlers
-      // this.startGame.addEventListener('click', (e) => {
-      //     e.preventDefault();
-      //     this.newGame();
-      // });
+      this.start = this.shadowRoot.querySelector('#startgame');
+      this.reset = this.shadowRoot.querySelector('#resetgame'); //event handlers
 
-      this.startGame.forEach(function (start) {
-        start.addEventListener('click', function (e) {
-          e.preventDefault();
+      this.start.addEventListener('click', function (e) {
+        e.preventDefault();
 
-          _this2.newGame();
-        });
+        _this2.newGame();
+      });
+      this.reset.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        _this2.resetGame();
       });
       this.colors.forEach(function (color) {
-        //color.addEventListener('touchstart', (e) => this.handlePlayerClick(e), { passive: true });
         color.addEventListener('click', function (e) {
           return _this2.handlePlayerClick(e);
         });
@@ -229,15 +230,24 @@ function (_HTMLElement) {
     key: "newGame",
     value: function newGame() {
       this.clearGame();
+      this.message.textContent = this.game.textDefault;
+      this.addCount();
+    }
+  }, {
+    key: "resetGame",
+    value: function resetGame() {
+      this.clearGame();
+      this.message.textContent = this.game.textStart;
+      this.setHighscore(0);
+      this.updateHighscore(0);
     }
   }, {
     key: "clearGame",
     value: function clearGame() {
       this.game.gameSeq = [];
+      this.game.gamePlayer = [];
       this.game.count = 0;
       this.updateScore();
-      this.message.textContent = this.game.textDefault;
-      this.addCount();
     }
   }, {
     key: "addCount",
@@ -317,6 +327,7 @@ function (_HTMLElement) {
 
       if (this.game.playerSeq[this.game.playerSeq.length - 1] !== this.game.gameSeq[this.game.playerSeq.length - 1]) {
         this.message.innerHTML = " \xAF\\_(\u30C4)_/\xAF<br>You did ".concat(this.game.count - 1, " turns!");
+        this.checkHighscore(this.game.count - 1);
         this.game.lock = true;
       } else {
         this.sounds[id].play();
@@ -327,6 +338,7 @@ function (_HTMLElement) {
 
           if (this.game.count == this.game.rounds) {
             this.message.innerHTML = this.game.textWinner;
+            this.checkHighscore(this.game.count);
             this.game.lock = true;
           } else {
             this.game.lock = true;
@@ -351,9 +363,32 @@ function (_HTMLElement) {
       this.addCount();
     }
   }, {
+    key: "checkHighscore",
+    value: function checkHighscore(rounds) {
+      if (rounds > this.getHighscore()) {
+        this.setHighscore(rounds);
+        this.updateHighscore(rounds);
+      }
+    }
+  }, {
+    key: "updateHighscore",
+    value: function updateHighscore(hs) {
+      hs < 10 ? this.highscore.innerHTML = '0' + hs : this.highscore.textContent = hs;
+    }
+  }, {
+    key: "getHighscore",
+    value: function getHighscore() {
+      return localStorage.getItem('highscore') ? localStorage.getItem('highscore') : 0;
+    }
+  }, {
+    key: "setHighscore",
+    value: function setHighscore(rounds) {
+      localStorage.setItem('highscore', rounds);
+    }
+  }, {
     key: "render",
     value: function render() {
-      this.shadowRoot.innerHTML = "\n            <link rel=\"stylesheet\" href=\"simon-game.css\">\n            <div class=\"leaderboard\">\n                <h3>Current High Score</h3>\n                <div class=\"highscore\">\n                    <span><strong>Name:</strong></span><span class=\"highscorename\"></span><span><strong>Score:</strong></span><span class=\"highscorenum\"></span>\n                </div>\n            </div>\n            <div class=\"controls\">\n            <a class=\"btn startgame\" href=\"#\">Start</a>\n            <span class=\"score\" id=\"score\">00</span>\n            <a class=\"btn startgame\" href=\"#\">Reset</a>\n            </div>\n            <div id=\"gamepad\">\n                <div class=\"colors green\" id=\"0\"></div>\n                <div class=\"colors red\" id=\"1\"></div>\n                <div class=\"colors yellow\" id=\"2\"></div>\n                <div class=\"colors blue\" id=\"3\"></div>\n                <div id=\"center\">\n                    <div id=\"message\">Simon</div>\n                </div>\n            </div>\n        ";
+      this.shadowRoot.innerHTML = "\n            <link rel=\"stylesheet\" href=\"simon-game.css\">\n            <div class=\"hs-outer\">\n                <h3>High Score: <span id=\"highscore\">3</span></h3>\n            </div>\n            <div class=\"controls\">\n            <a class=\"btn\" id=\"startgame\" href=\"#\">Start</a>\n            <span class=\"score\" id=\"score\">00</span>\n            <a class=\"btn\" id=\"resetgame\" href=\"#\">Reset</a>\n            </div>\n            <div id=\"gamepad\">\n                <div class=\"colors green\" id=\"0\"></div>\n                <div class=\"colors red\" id=\"1\"></div>\n                <div class=\"colors yellow\" id=\"2\"></div>\n                <div class=\"colors blue\" id=\"3\"></div>\n                <div id=\"center\">\n                    <div id=\"message\">Simon</div>\n                </div>\n            </div>\n        ";
     }
   }]);
 

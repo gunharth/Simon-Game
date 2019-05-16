@@ -9,16 +9,17 @@ $yellow: #fbc02d;
 $yellow-light: #fff263;
 
 h3 {
-    margin: 2px;
+    margin: 10px;
     color: #1a1a1a;
     font-size: 1.17em;
+    font-weight: normal;
 }
 
-.leaderboard {
+.hs-outer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    display: none;
+    // display: none;
 }
 
 .controls {

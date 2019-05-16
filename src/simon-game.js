@@ -11,7 +11,7 @@ export class SimonGame extends HTMLElement {
             gameSeq: [],
             playerSeq: [],
             lock: true,
-            // textStart: 'Start',
+            textStart: 'Simon',
             textDefault: 'Simon says',
             textLevel: [
                 'Good!',
@@ -27,10 +27,10 @@ export class SimonGame extends HTMLElement {
 
         // game fields and buttons
         this.score;
+        this.highscore;
         this.colors;
         this.message;
         this.startGame;
-
         this.sounds = [
             new Audio('audio/simonSound1.mp3'),
             new Audio('audio/simonSound2.mp3'),
@@ -40,43 +40,49 @@ export class SimonGame extends HTMLElement {
     }
 
     connectedCallback() {
-
         this.render();
         // init game fields and buttons
         this.score = this.shadowRoot.querySelector('#score');
+        this.highscore = this.shadowRoot.querySelector('#highscore');
+        this.updateHighscore(this.getHighscore());
         this.colors = this.shadowRoot.querySelectorAll('.colors');
-        //this.sounds = this.shadowRoot.querySelectorAll('audio');
         this.message = this.shadowRoot.querySelector('#message');
-        this.startGame = this.shadowRoot.querySelectorAll('.startgame');
+        this.start = this.shadowRoot.querySelector('#startgame');
+        this.reset = this.shadowRoot.querySelector('#resetgame');
 
-        // event handlers
-        // this.startGame.addEventListener('click', (e) => {
-        //     e.preventDefault();
-        //     this.newGame();
-        // });
-        this.startGame.forEach((start) => {
-            start.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.newGame();
-            });
+        //event handlers
+        this.start.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.newGame();
+        });
+        this.reset.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.resetGame();
         });
 
         this.colors.forEach((color) => {
-            //color.addEventListener('touchstart', (e) => this.handlePlayerClick(e), { passive: true });
             color.addEventListener('click', (e) => this.handlePlayerClick(e));
         });
     }
 
     newGame() {
         this.clearGame();
+        this.message.textContent = this.game.textDefault;
+        this.addCount();
+    }
+
+    resetGame() {
+        this.clearGame();
+        this.message.textContent = this.game.textStart;
+        this.setHighscore(0);
+        this.updateHighscore(0);
     }
 
     clearGame() {
         this.game.gameSeq = [];
+        this.game.gamePlayer = [];
         this.game.count = 0;
         this.updateScore();
-        this.message.textContent = this.game.textDefault;
-        this.addCount();
     }
 
     addCount() {
@@ -138,7 +144,8 @@ export class SimonGame extends HTMLElement {
 
     checkPlayerSeq(id) {
         if (this.game.playerSeq[this.game.playerSeq.length - 1] !== this.game.gameSeq[this.game.playerSeq.length - 1]) {
-            this.message.innerHTML = ` ¯\\_(ツ)_/¯<br>You did ${this.game.count-1} turns!`;
+            this.message.innerHTML = ` ¯\\_(ツ)_/¯<br>You did ${this.game.count - 1} turns!`;
+            this.checkHighscore(this.game.count - 1);
             this.game.lock = true;
         } else {
             this.sounds[id].play();
@@ -147,6 +154,7 @@ export class SimonGame extends HTMLElement {
                 this.updateScore();
                 if (this.game.count == this.game.rounds) {
                     this.message.innerHTML = this.game.textWinner;
+                    this.checkHighscore(this.game.count);
                     this.game.lock = true;
                 } else {
                     this.game.lock = true;
@@ -170,19 +178,37 @@ export class SimonGame extends HTMLElement {
         this.addCount();
     }
 
+    checkHighscore(rounds) {
+        if (rounds > this.getHighscore()) {
+            this.setHighscore(rounds);
+            this.updateHighscore(rounds)
+        }
+    }
+
+    updateHighscore(hs) {
+        (hs < 10) ?
+            this.highscore.innerHTML = '0' + hs :
+            this.highscore.textContent = hs;
+    }
+
+    getHighscore() {
+        return localStorage.getItem('highscore') ? localStorage.getItem('highscore') : 0;
+    }
+
+    setHighscore(rounds) {
+        localStorage.setItem('highscore', rounds);
+    }
+
     render() {
         this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="simon-game.css">
-            <div class="leaderboard">
-                <h3>Current High Score</h3>
-                <div class="highscore">
-                    <span><strong>Name:</strong></span><span class="highscorename"></span><span><strong>Score:</strong></span><span class="highscorenum"></span>
-                </div>
+            <div class="hs-outer">
+                <h3>High Score: <span id="highscore">3</span></h3>
             </div>
             <div class="controls">
-            <a class="btn startgame" href="#">Start</a>
+            <a class="btn" id="startgame" href="#">Start</a>
             <span class="score" id="score">00</span>
-            <a class="btn startgame" href="#">Reset</a>
+            <a class="btn" id="resetgame" href="#">Reset</a>
             </div>
             <div id="gamepad">
                 <div class="colors green" id="0"></div>
