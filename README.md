@@ -1,11 +1,49 @@
 # Simon-Game
+Web component & PWA
 
-## Project outline
-- Project to be published at https://gunharth.github.io/Simon-Game/
-- First, let's create the game logic using laravel mix as the bundler
-- Convert game to a Web Component
-- Create the PWA
+## Features
+- uses Laravel-Mix webpack wrapper for compilation and minification
+- developed as a web component
+- 100% PWA ready
+- extra installation feature for latest Chrome browsers
+- auto deployment for https://simon.gunicode.com through Netlify
+- high score saved to local storage
 
-## Options
-- possible use tailwindcss
-- implement pouchdb / couchdb results
+## Screenshot
+![Screenshot](screenshot.png)
+
+## Lighthouse Report
+![Lighhouse](lighthouse.png)
+
+## Installation
+Clone the repository
+```
+git clone git@github.com:gunharth/Simon-Game.git
+````
+cd into the directory
+```
+cd Simon-Game
+````
+Install dependencies
+```
+npm install
+```
+Start the server on localhost:3000
+```
+npm start
+```
+
+## Development
+Compile src to public folder
+```
+npm run dev
+```
+Start BrowserSync and listen to changes
+Note: Keep dev tools open and disable cache in Chrome dev tools under the Network tab to help cache busting
+```
+npm run watch
+```
+Compile and minify assets ready for production
+```
+npm run prod
+```
