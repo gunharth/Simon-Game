@@ -8,6 +8,7 @@ Web component & PWA
 - extra installation feature for latest Chrome browsers
 - auto deployment for https://simon.gunicode.com through Netlify
 - high score saved to local storage
+- for test purpose the maximum rounds are set to 5. You can change this in the simon-game.js file under game settings
 
 ## Screenshot
 ![Screenshot](screenshot.png)
@@ -47,3 +48,6 @@ Compile and minify assets ready for production
 ```
 npm run prod
 ```
+
+## ToDo
+- audio delay. especially on iOS there's a terrible delay which there might not even be a solution for.
