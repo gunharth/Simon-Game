@@ -519,6 +519,63 @@ body {
   background: linear-gradient(to right, #fff, #e2e2e2);
 }
 
+#loader {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  transition: all 2000ms ease-in-out;
+  opacity: 1;
+  background: linear-gradient(to right, #fff, #e2e2e2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#loader.is-hidden {
+  opacity: 0;
+}
+
+#loader img {
+  transition: -webkit-transform 0.8s ease-in-out;
+  transition: transform 0.8s ease-in-out;
+  transition: transform 0.8s ease-in-out, -webkit-transform 0.8s ease-in-out;
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+  opacity: 1;
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  -webkit-animation: rotating 4s linear infinite;
+          animation: rotating 4s linear infinite;
+}
+
 h1 {
   font-size: 2em;
   text-shadow: 1px 1px 5px #000000;
