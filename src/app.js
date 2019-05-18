@@ -1,5 +1,4 @@
 import { SimonGame } from './simon-game.js';
-import { timeout } from 'q';
 
 customElements.define('simon-game', SimonGame);
 
