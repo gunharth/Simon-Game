@@ -53,10 +53,12 @@ export class SimonGame extends HTMLElement {
         //event handlers
         this.start.addEventListener('click', (e) => {
             e.preventDefault();
+
             this.newGame();
         });
         this.reset.addEventListener('click', (e) => {
             e.preventDefault();
+
             this.resetGame();
         });
 
@@ -68,6 +70,8 @@ export class SimonGame extends HTMLElement {
     newGame() {
         this.clearGame();
         this.message.textContent = this.game.textDefault;
+        this.start.setAttribute('disabled', true);
+        this.reset.setAttribute('disabled', true);
         this.addCount();
     }
 
@@ -146,18 +150,22 @@ export class SimonGame extends HTMLElement {
         if (this.game.playerSeq[this.game.playerSeq.length - 1] !== this.game.gameSeq[this.game.playerSeq.length - 1]) {
             this.message.innerHTML = ` ¯\\_(ツ)_/¯<br>You did ${this.game.count - 1} turns!`;
             this.checkHighscore(this.game.count - 1);
+            this.start.removeAttribute('disabled');
+            this.reset.removeAttribute('disabled');
             this.game.lock = true;
         } else {
             this.sounds[id].play();
             var check = this.game.playerSeq.length === this.game.gameSeq.length;
             if (check) {
+                this.game.lock = true;
                 this.updateScore();
                 if (this.game.count == this.game.rounds) {
                     this.message.innerHTML = this.game.textWinner;
                     this.checkHighscore(this.game.count);
-                    this.game.lock = true;
+                    this.start.setAttribute('disabled', false);
+                    this.reset.setAttribute('disabled', false);
                 } else {
-                    this.game.lock = true;
+                    // this.game.lock = true;
                     this.message.textContent = this.game.textLevel[(Math.floor(Math.random() * 5))];
                     setTimeout(() => {
                         this.message.textContent = this.game.textDefault;
@@ -206,9 +214,9 @@ export class SimonGame extends HTMLElement {
                 <h3>High Score: <span id="highscore">3</span></h3>
             </div>
             <div class="controls">
-            <a class="btn" id="startgame" href="#">Start</a>
+            <button id="startgame" href="#">Start</button>
             <span class="score" id="score">00</span>
-            <a class="btn" id="resetgame" href="#">Reset</a>
+            <button id="resetgame" href="#">Reset</button>
             </div>
             <div id="gamepad">
                 <div class="colors green" id="0"></div>

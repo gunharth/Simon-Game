@@ -242,6 +242,8 @@ function (_HTMLElement) {
     value: function newGame() {
       this.clearGame();
       this.message.textContent = this.game.textDefault;
+      this.start.setAttribute('disabled', true);
+      this.reset.setAttribute('disabled', true);
       this.addCount();
     }
   }, {
@@ -339,20 +341,24 @@ function (_HTMLElement) {
       if (this.game.playerSeq[this.game.playerSeq.length - 1] !== this.game.gameSeq[this.game.playerSeq.length - 1]) {
         this.message.innerHTML = " \xAF\\_(\u30C4)_/\xAF<br>You did ".concat(this.game.count - 1, " turns!");
         this.checkHighscore(this.game.count - 1);
+        this.start.removeAttribute('disabled');
+        this.reset.removeAttribute('disabled');
         this.game.lock = true;
       } else {
         this.sounds[id].play();
         var check = this.game.playerSeq.length === this.game.gameSeq.length;
 
         if (check) {
+          this.game.lock = true;
           this.updateScore();
 
           if (this.game.count == this.game.rounds) {
             this.message.innerHTML = this.game.textWinner;
             this.checkHighscore(this.game.count);
-            this.game.lock = true;
+            this.start.setAttribute('disabled', false);
+            this.reset.setAttribute('disabled', false);
           } else {
-            this.game.lock = true;
+            // this.game.lock = true;
             this.message.textContent = this.game.textLevel[Math.floor(Math.random() * 5)];
             setTimeout(function () {
               _this5.message.textContent = _this5.game.textDefault;
@@ -399,7 +405,7 @@ function (_HTMLElement) {
   }, {
     key: "render",
     value: function render() {
-      this.shadowRoot.innerHTML = "\n            <link rel=\"stylesheet\" href=\"simon-game.css\">\n            <div class=\"hs-outer\">\n                <h3>High Score: <span id=\"highscore\">3</span></h3>\n            </div>\n            <div class=\"controls\">\n            <a class=\"btn\" id=\"startgame\" href=\"#\">Start</a>\n            <span class=\"score\" id=\"score\">00</span>\n            <a class=\"btn\" id=\"resetgame\" href=\"#\">Reset</a>\n            </div>\n            <div id=\"gamepad\">\n                <div class=\"colors green\" id=\"0\"></div>\n                <div class=\"colors red\" id=\"1\"></div>\n                <div class=\"colors yellow\" id=\"2\"></div>\n                <div class=\"colors blue\" id=\"3\"></div>\n                <div id=\"center\">\n                    <div id=\"message\">Simon</div>\n                </div>\n            </div>\n        ";
+      this.shadowRoot.innerHTML = "\n            <link rel=\"stylesheet\" href=\"simon-game.css\">\n            <div class=\"hs-outer\">\n                <h3>High Score: <span id=\"highscore\">3</span></h3>\n            </div>\n            <div class=\"controls\">\n            <button id=\"startgame\" href=\"#\">Start</button>\n            <span class=\"score\" id=\"score\">00</span>\n            <button id=\"resetgame\" href=\"#\">Reset</button>\n            </div>\n            <div id=\"gamepad\">\n                <div class=\"colors green\" id=\"0\"></div>\n                <div class=\"colors red\" id=\"1\"></div>\n                <div class=\"colors yellow\" id=\"2\"></div>\n                <div class=\"colors blue\" id=\"3\"></div>\n                <div id=\"center\">\n                    <div id=\"message\">Simon</div>\n                </div>\n            </div>\n        ";
     }
   }]);
 
