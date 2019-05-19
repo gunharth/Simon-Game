@@ -1,4 +1,4 @@
-import { SimonGame } from './simon-game.js';
+import { SimonGame } from './component/simon-game/simon-game.js';
 
 customElements.define('simon-game', SimonGame);
 

@@ -95,9 +95,9 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _simon_game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./simon-game.js */ "./src/simon-game.js");
+/* harmony import */ var _component_simon_game_simon_game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component/simon-game/simon-game.js */ "./src/component/simon-game/simon-game.js");
 
-customElements.define('simon-game', _simon_game_js__WEBPACK_IMPORTED_MODULE_0__["SimonGame"]); // loading animation
+customElements.define('simon-game', _component_simon_game_simon_game_js__WEBPACK_IMPORTED_MODULE_0__["SimonGame"]); // loading animation
 
 var loader = document.getElementById('loader');
 setTimeout(function () {
@@ -129,10 +129,10 @@ if ('serviceWorker' in navigator) {
 
 /***/ }),
 
-/***/ "./src/simon-game.js":
-/*!***************************!*\
-  !*** ./src/simon-game.js ***!
-  \***************************/
+/***/ "./src/component/simon-game/simon-game.js":
+/*!************************************************!*\
+  !*** ./src/component/simon-game/simon-game.js ***!
+  \************************************************/
 /*! exports provided: SimonGame */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -414,10 +414,10 @@ function (_HTMLElement) {
 
 /***/ }),
 
-/***/ "./src/simon-game.scss":
-/*!*****************************!*\
-  !*** ./src/simon-game.scss ***!
-  \*****************************/
+/***/ "./src/component/simon-game/simon-game.scss":
+/*!**************************************************!*\
+  !*** ./src/component/simon-game/simon-game.scss ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -426,14 +426,14 @@ function (_HTMLElement) {
 /***/ }),
 
 /***/ 0:
-/*!***************************************************************!*\
-  !*** multi ./src/app.js ./src/simon-game.scss ./src/app.scss ***!
-  \***************************************************************/
+/*!************************************************************************************!*\
+  !*** multi ./src/app.js ./src/component/simon-game/simon-game.scss ./src/app.scss ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/app.js */"./src/app.js");
-__webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/simon-game.scss */"./src/simon-game.scss");
+__webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/component/simon-game/simon-game.scss */"./src/component/simon-game/simon-game.scss");
 module.exports = __webpack_require__(/*! /Users/Guni/Code/guni/Simon-Game/src/app.scss */"./src/app.scss");
 
 

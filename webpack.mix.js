@@ -12,7 +12,7 @@ let mix = require('laravel-mix');
  */
 
 mix.js('src/app.js', 'public/');
-mix.sass('src/simon-game.scss', 'public/');
+mix.sass('src/component/simon-game/simon-game.scss', 'public/');
 mix.sass('src/app.scss', 'public/');
 mix.copy('src/index.html', 'public/');
 mix.copy('src/sw.js', 'public/');
