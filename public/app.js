@@ -242,8 +242,8 @@ function (_HTMLElement) {
     value: function newGame() {
       this.clearGame();
       this.message.textContent = this.game.textDefault;
-      this.start.setAttribute('disabled', true);
-      this.reset.setAttribute('disabled', true);
+      this.start.setAttribute('disabled', true); //this.reset.setAttribute('disabled', true);
+
       this.addCount();
     }
   }, {
@@ -341,8 +341,8 @@ function (_HTMLElement) {
       if (this.game.playerSeq[this.game.playerSeq.length - 1] !== this.game.gameSeq[this.game.playerSeq.length - 1]) {
         this.message.innerHTML = " \xAF\\_(\u30C4)_/\xAF<br>You did ".concat(this.game.count - 1, " turns!");
         this.checkHighscore(this.game.count - 1);
-        this.start.removeAttribute('disabled');
-        this.reset.removeAttribute('disabled');
+        this.start.removeAttribute('disabled'); //this.reset.removeAttribute('disabled');
+
         this.game.lock = true;
       } else {
         this.sounds[id].play();
@@ -355,8 +355,7 @@ function (_HTMLElement) {
           if (this.game.count == this.game.rounds) {
             this.message.innerHTML = this.game.textWinner;
             this.checkHighscore(this.game.count);
-            this.start.setAttribute('disabled', false);
-            this.reset.setAttribute('disabled', false);
+            this.start.setAttribute('disabled', false); //this.reset.setAttribute('disabled', false);
           } else {
             // this.game.lock = true;
             this.message.textContent = this.game.textLevel[Math.floor(Math.random() * 5)];

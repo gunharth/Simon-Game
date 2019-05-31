@@ -53,12 +53,10 @@ export class SimonGame extends HTMLElement {
         //event handlers
         this.start.addEventListener('click', (e) => {
             e.preventDefault();
-
             this.newGame();
         });
         this.reset.addEventListener('click', (e) => {
             e.preventDefault();
-
             this.resetGame();
         });
 
@@ -71,7 +69,7 @@ export class SimonGame extends HTMLElement {
         this.clearGame();
         this.message.textContent = this.game.textDefault;
         this.start.setAttribute('disabled', true);
-        this.reset.setAttribute('disabled', true);
+        //this.reset.setAttribute('disabled', true);
         this.addCount();
     }
 
@@ -151,7 +149,7 @@ export class SimonGame extends HTMLElement {
             this.message.innerHTML = ` ¯\\_(ツ)_/¯<br>You did ${this.game.count - 1} turns!`;
             this.checkHighscore(this.game.count - 1);
             this.start.removeAttribute('disabled');
-            this.reset.removeAttribute('disabled');
+            //this.reset.removeAttribute('disabled');
             this.game.lock = true;
         } else {
             this.sounds[id].play();
@@ -163,7 +161,7 @@ export class SimonGame extends HTMLElement {
                     this.message.innerHTML = this.game.textWinner;
                     this.checkHighscore(this.game.count);
                     this.start.setAttribute('disabled', false);
-                    this.reset.setAttribute('disabled', false);
+                    //this.reset.setAttribute('disabled', false);
                 } else {
                     // this.game.lock = true;
                     this.message.textContent = this.game.textLevel[(Math.floor(Math.random() * 5))];
