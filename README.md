@@ -49,5 +49,7 @@ Compile and minify assets ready for production
 npm run prod
 ```
 
-## ToDo
+## Todos & notes
+- Next time use https://developers.google.com/web/tools/workbox/
+- Redo the app with stencil
 - audio delay. especially on iOS there's a terrible delay which there might not even be a solution for.
