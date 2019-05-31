@@ -76,6 +76,7 @@ export class SimonGame extends HTMLElement {
     resetGame() {
         this.clearGame();
         this.message.textContent = this.game.textStart;
+        this.start.setAttribute('disabled', false);
         this.setHighscore(0);
         this.updateHighscore(0);
     }
