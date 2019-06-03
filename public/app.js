@@ -356,8 +356,8 @@ function (_HTMLElement) {
           if (this.game.count == this.game.rounds) {
             this.message.innerHTML = this.game.textWinner;
             this.checkHighscore(this.game.count);
-            this.start.setAttribute('disabled', false);
-            this.reset.setAttribute('disabled', false);
+            this.start.removeAttribute('disabled');
+            this.reset.removeAttribute('disabled');
           } else {
             // this.game.lock = true;
             this.message.textContent = this.game.textLevel[Math.floor(Math.random() * 5)];
