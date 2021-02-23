@@ -29,7 +29,7 @@ Install dependencies
 ```
 npm install
 ```
-Start the server on localhost:3000
+Start the dev server on localhost:3000
 ```
 npm start
 ```
@@ -51,5 +51,4 @@ npm run prod
 
 ## Todos & notes
 - Next time use https://developers.google.com/web/tools/workbox/
-- Redo the app with stencil
 - audio delay. especially on iOS there's a terrible delay which there might not even be a solution for.
