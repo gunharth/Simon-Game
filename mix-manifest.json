@@ -1,7 +1,7 @@
 {
     "/public/app.js": "/public/app.js",
-    "/public/simon-game.css": "/public/simon-game.css",
     "/public/app.css": "/public/app.css",
+    "/public/simon-game.css": "/public/simon-game.css",
     "/public/index.html": "/public/index.html",
     "/public/sw.js": "/public/sw.js"
 }

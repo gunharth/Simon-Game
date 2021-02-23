@@ -27,17 +27,17 @@ mix.copy('src/sw.js', 'public/');
 //     ]
 // })
 
-mix.browserSync({
-    proxy: 'localhost:3000',
-    port: 3001,
-    ui: {
-        port: 3002
-    },
-    files: [
-        'public/*',
-        //'src/*'
-    ]
-});
+// mix.browserSync({
+//     proxy: 'localhost:3000',
+//     port: 3001,
+//     ui: {
+//         port: 3002
+//     },
+//     files: [
+//         'public/*',
+//         //'src/*'
+//     ]
+// });
 
 // Full API
 // mix.js(src, output);

@@ -3,17 +3,15 @@
   "version": "1.0.0",
   "description": "Simon Game",
   "engines": {
-    "node": "11.x"
+    "node": "15.x"
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "hot": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "dev": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "mix --production"
   },
   "keywords": [
     "nodejs",
@@ -23,17 +21,13 @@
   "author": "Gunharth Randolf",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.17.1"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.3",
-    "browser-sync-webpack-plugin": "2.0.1",
-    "cross-env": "^5.2.0",
-    "laravel-mix": "^4.0.15",
+    "laravel-mix": "^6.0.11",
     "normalize-scss": "^7.0.1",
-    "resolve-url-loader": "2.3.1",
-    "sass": "^1.17.3",
-    "sass-loader": "7.*",
-    "vue-template-compiler": "^2.6.10"
+    "resolve-url-loader": "^3.1.2",
+    "sass": "^1.32.8",
+    "sass-loader": "^8.0.2"
   }
 }
