@@ -1,4 +1,4 @@
-let mix = require('laravel-mix');
+let mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,32 +11,35 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('src/app.js', 'public/');
-mix.sass('src/component/simon-game/simon-game.scss', 'public/');
-mix.sass('src/app.scss', 'public/');
-mix.copy('src/index.html', 'public/');
-mix.copy('src/sw.js', 'public/');
+mix.js("src/app.js", "public/");
+mix.sass("src/component/simon-game/simon-game.scss", "public/");
+mix.sass("src/app.scss", "public/");
+mix.copy("src/index.html", "public/");
+mix.copy("src/sw.js", "public/");
 
-// mix.webpackConfig({
-//     plugins: [
-//         new HtmlMinifierPlugin({
-//             // HTMLMinifier options
-//             test: /\.html$/,
-//             loaders: ['file-loader?name=[name].html', 'extract-loader', 'html-loader']
-//         })
-//     ]
-// })
+mix.webpackConfig({
+  stats: {
+    children: true,
+  },
+  //     plugins: [
+  //         new HtmlMinifierPlugin({
+  //             // HTMLMinifier options
+  //             test: /\.html$/,
+  //             loaders: ['file-loader?name=[name].html', 'extract-loader', 'html-loader']
+  //         })
+  //     ]
+});
 
 mix.browserSync({
-    proxy: 'localhost:3000',
-    port: 3001,
-    ui: {
-        port: 3002
-    },
-    files: [
-        'public/*',
-        //'src/*'
-    ]
+  proxy: "localhost:3000",
+  port: 3001,
+  ui: {
+    port: 3002,
+  },
+  files: [
+    "public/*",
+    //'src/*'
+  ],
 });
 
 // Full API

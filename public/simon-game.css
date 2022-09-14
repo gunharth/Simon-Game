@@ -87,7 +87,7 @@ button#resetgame[disabled] {
 }
 
 .green.active {
-  background: #0dff00;
+  background: rgb(13, 255, 0);
 }
 
 .red {
@@ -98,7 +98,7 @@ button#resetgame[disabled] {
 }
 
 .red.active {
-  background: red;
+  background: rgb(255, 0, 0);
 }
 
 .yellow {
@@ -109,7 +109,7 @@ button#resetgame[disabled] {
 }
 
 .yellow.active {
-  background: #fff700;
+  background: rgb(255, 247, 0);
 }
 
 .blue {
@@ -120,7 +120,7 @@ button#resetgame[disabled] {
 }
 
 .blue.active {
-  background: dodgerblue;
+  background: rgb(30, 144, 255);
 }
 
 .colors:hover {
@@ -149,7 +149,6 @@ button#resetgame[disabled] {
   #gamepad {
     transform: scale(0.8);
   }
-
   #center {
     width: 170px;
     height: 170px;
@@ -164,7 +163,6 @@ button#resetgame[disabled] {
     grid-template-columns: repeat(2, 150px);
     grid-template-rows: repeat(2, 150px);
   }
-
   #center {
     width: 100px;
     height: 100px;
@@ -179,7 +177,6 @@ button#resetgame[disabled] {
     grid-template-columns: repeat(2, 150px);
     grid-template-rows: repeat(2, 150px);
   }
-
   #center {
     width: 100px;
     height: 100px;
@@ -194,7 +191,6 @@ button#resetgame[disabled] {
     grid-template-columns: repeat(2, 150px);
     grid-template-rows: repeat(2, 150px);
   }
-
   #center {
     width: 100px;
     height: 100px;
